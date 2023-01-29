@@ -1,4 +1,5 @@
 require('vimrc')
 require('packages')
-require('treesitter')
-require('lsp')
+require('_treesitter')
+require('_lsp')
+require('_telescope')

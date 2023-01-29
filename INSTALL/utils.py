@@ -20,7 +20,7 @@ def call(cmd):
     scall(cmd, shell=True)
 
 
-def backupAndAddLink(dest=None, src=None):
+def backupAndAddLink(dest='', src=None):
 
     def createDestDirIfNotExists():
 
@@ -82,7 +82,7 @@ def backupAndAddLink(dest=None, src=None):
         print('Nothing to be done... Correct link exists at ' + dest)
 
 
-def removeLinkAndRestoreBackup(src=None, dest=None):
+def removeLinkAndRestoreBackup(src=None, dest=''):
 
     def fileAlreadyExists():
 

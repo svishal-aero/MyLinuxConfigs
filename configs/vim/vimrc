@@ -1,3 +1,6 @@
+" Disable mouse
+set mouse=
+
 " Colorscheme
 let g:gruvbox_contrast_dark = 'hard'
 set background=dark
@@ -5,7 +8,8 @@ colo gruvbox
 set cursorline
 
 " Disable recording
-map q <Nop>
+nnoremap q <Nop>
+nnoremap Q <Nop>
 
 " Change the leader key to comma
 let mapleader = " "
@@ -16,7 +20,7 @@ inoremap jk <Esc>
 " Set incremental search
 set incsearch
 set hlsearch
-map <leader>h :noh<CR>
+nnoremap <leader>h <cmd>noh<CR>
 
 " Set line numbers
 set nu
@@ -50,6 +54,10 @@ set smartindent
 " Tab character details
 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
+" Don't copy replaced word to the buffer (instead copy to the empty buffer)
+nnoremap <leader>p "_dP
+nnoremap <leader>d "_d
+
 " Open file where last left
 if has("autocmd")
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
@@ -59,20 +67,10 @@ endif
 " Set cursor to block when in insert mode in neovim
 set guicursor=i-ci:block
 
-" Plugins go here ==================================================================================================
-" To install newly added plugins use :PlugInstall
-" To update all plugins use :PluginUpdate
-" To update a set of plugins use :PluginUpdate followed by a list of names
-call plug#begin('/home/svishal/Git/MyLinuxConfigs/externals/nvim/share/nvim/plugged')
-Plug 'preservim/NERDtree'
-call plug#end()
+" Open Netrw explorer to browse through the file tree
+nnoremap <leader>pv <cmd>Ex<CR>
 
-" Plugin-specific shortcuts ========================================================================================
-" Toggle NERDTree
-nnoremap <leader>n :NERDTreeToggle<CR>
-let g:NERDTreeQuitOnOpen = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
+" WARNING: Plugins are only managed in neovim
 
 " Status line ======================================================================================================
 au InsertEnter * hi statusline guifg=black guibg=#d7afff ctermbg=black ctermfg=magenta
@@ -110,17 +108,3 @@ hi User2 ctermfg=007 ctermbg=236 guibg=#303030 guifg=#adadad
 hi User3 ctermfg=236 ctermbg=236 guibg=#303030 guifg=#303030
 hi User4 ctermfg=239 ctermbg=239 guibg=#4e4e4e guifg=#4e4e4e
 "====================================================================================================================
-
-" Old configurations ===============================================================================================
-
-" Directory pane on the left
-" let g:netrw_banner = 0        " Remove banner
-" let g:netrw_liststyle = 3     " Tree structure
-" let g:netrw_browse_split = 4  " Open file in the previous pane
-" let g:netrw_altv = 1          " Vertical orientation (I guess)
-" let g:netrw_winsize = 25      " Width in percent of terminal width
-
-" Add matching brackets, braces and parantheses
-" inoremap [ []<Esc>i
-" inoremap { {}<Esc>i
-" inoremap ( ()<Esc>i
