@@ -16,7 +16,7 @@ lsp.set_preferences({
 })
 
 lsp.setup_nvim_cmp({
-    mapping = cmp_mappings,
+    mapping = cmp_mappings
 })
 
 lsp.on_attach(function(client, bufnr)
@@ -29,7 +29,7 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set('n', '<leader>o', function() vim.diagnostic.open_float() end, opts)
     vim.keymap.set('n', '<leader>;', function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set('n', '<leader>,', function() vim.diagnostic.goto_prev() end, opts)
-    vim.keymap.set('n', '<C-k>', function() vim.lsp.buf.signature_help() end, opts)
+    --vim.keymap.set('n', '<C-k>', function() vim.lsp.buf.signature_help() end, opts)
 
 end)
 

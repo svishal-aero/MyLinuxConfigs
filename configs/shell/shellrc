@@ -4,6 +4,8 @@ git_branch() {
     unset __temp
 }
 
-PS1="\[\033[01;33m\]\$(git_branch)\[\033[00m\]$PS1"
+PS1="$PS1\[\033[01;33m\]\$(git_branch)\[\033[00m\]"
+
+PROMPT_COMMAND="echo"
 
 stty -ixon

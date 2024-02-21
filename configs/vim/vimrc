@@ -5,34 +5,52 @@ set mouse=
 let g:gruvbox_contrast_dark = 'hard'
 set background=dark
 colo gruvbox
+hi Normal guibg=NONE ctermbg=NONE
 set cursorline
 
-" Disable recording
-nnoremap q <Nop>
-nnoremap Q <Nop>
-
-" Change the leader key to comma
+" Change the leader key to space
 let mapleader = " "
 
-" Alias for the escape character (Press 'vv' to exit the visual mode)
+" Alias for the escape character
 inoremap jk <Esc>
 
 " Set incremental search
 set incsearch
 set hlsearch
+
+"=========================================
+" Set some keymaps
+"=========================================
+" Remove current highlighting
 nnoremap <leader>h <cmd>noh<CR>
 
-" Set line numbers
-set nu
-
-" Follow syntax
-" syntax on
+" Disable recording
+nnoremap q <Nop>
+nnoremap Q <Nop>
 
 " Switch panes easily
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" Don't copy replaced word to the buffer
+" (instead copy to the empty buffer)
+nnoremap <leader>p "_dP
+nnoremap <leader>d "_d
+
+" Netrw explorer
+nnoremap <leader>e <cmd>30Lex<CR>
+
+" Close buffer
+nnoremap <leader>bc <cmd>bdelete<CR>
+"=========================================
+
+" Set line numbers
+set nu rnu
+
+" Follow syntax
+" syntax on
 
 " Force plaintex files to be recognized as tex files
 let g:tex_flavor = "latex"
@@ -54,10 +72,6 @@ set smartindent
 " Tab character details
 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
-" Don't copy replaced word to the buffer (instead copy to the empty buffer)
-nnoremap <leader>p "_dP
-nnoremap <leader>d "_d
-
 " Open file where last left
 if has("autocmd")
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
@@ -66,9 +80,6 @@ endif
 
 " Set cursor to block when in insert mode in neovim
 set guicursor=i-ci:block
-
-" Open Netrw explorer to browse through the file tree
-nnoremap <leader>pv <cmd>Ex<CR>
 
 " WARNING: Plugins are only managed in neovim
 
