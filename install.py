@@ -1,6 +1,5 @@
 from gitsync.install import install as install_gitsync
 from INSTALL.basic import installConfig_basic
-from INSTALL.nvim import installConfig_nvim
 from INSTALL.shell import installConfig_shell
 from INSTALL.externals import installExternals
 
@@ -21,6 +20,5 @@ neovimNeeded = getOption('Do you wish to install neovim and associated packages?
 if neovimNeeded == 'y':
     platform = getOption('Please provide the hardware platform being used', ['x86_64', 'ppc64le'])
     installExternals(platform)
-    installConfig_nvim()
 
 install_gitsync()

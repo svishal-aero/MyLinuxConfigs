@@ -40,7 +40,7 @@ def installConfig_basic():
 
     configureGitToStorePassword()
 
-    addPluggedPathToVimRc()
+    #addPluggedPathToVimRc()
 
     backupAndAddLink(
         src=myconfigdir + '/configs/tmux/tmux.conf',
@@ -51,6 +51,13 @@ def installConfig_basic():
         src=myconfigdir + '/configs/vim/vimrc',
         dest=home + '/.vimrc'
     )
+
+    if os.path.exists(home + '/.config/nvim'):
+        call('mv ' + home + '/.config/nvim' + ' '
+                   + home + '/.config/nvim_bkp')
+
+    call('ln -s ' + myconfigdir + '/configs/nvim' + ' '
+                  + home        + '/.config/nvim')
 
     backupAndAddLink(
         src=myconfigdir + '/configs/readline/inputrc',
@@ -83,6 +90,12 @@ def uninstallConfig_basic():
         src=myconfigdir + '/configs/vim/vimrc',
         dest=home + '/.vimrc'
     )
+
+    call('rm ' + home + '/.config/nvim')
+
+    if os.path.exists(home + '/.config/nvim_bkp'):
+        call('mv ' + home + '/.config/nvim_bkp' + ' '
+                   + home + '/.config/nvim')
 
     removeLinkAndRestoreBackup(
         src=myconfigdir + '/configs/readline/inputrc',

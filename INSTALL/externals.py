@@ -32,7 +32,7 @@ externals = {
     # NodeJS (Contains NPM which is required for LSP)
     'node':
     {
-        'install': True,
+        'install': False,
         'x86_64': 'https://nodejs.org/dist/v16.14.1/'
                   'node-v16.14.1-linux-x64.tar.xz',
         'ppc64le': 'https://nodejs.org/dist/v16.14.1/'
@@ -42,7 +42,7 @@ externals = {
     # LSP for C/C++
     'llvm':
     {
-        'install': True,
+        'install': False,
         'x86_64': 'https://github.com/llvm/llvm-project/'
                   'releases/download/llvmorg-13.0.1/'
                   'clang+llvm-13.0.1-x86_64-linux-gnu-ubuntu-18.04.tar.xz',
@@ -54,14 +54,14 @@ externals = {
     # LSP for Python
     'pyright':
     {
-        'install': True,
+        'install': False,
         'custom': 'sudo npm install -g pyright'
     },
 
     # LSP for latex
     'texlab':
     {
-        'install': True,
+        'install': False,
         'x86_64': 'https://github.com/latex-lsp/texlab/releases/'
                   'download/v3.3.2/texlab-x86_64-linux.tar.gz',
         'custom': 'echo "Can install texlab only on x86_64 architectures"'

@@ -18,4 +18,4 @@ def install():
 
 def uninstall():
 
-    call('rm -f ' + home + '/bin/gitsync')
+    call('rm -f ' + home + '/bin/gitsync', shell=True)
