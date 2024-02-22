@@ -10,7 +10,7 @@ return {
         end
       },
     })
-    vim.o.cmdheight = 0
+    --vim.o.cmdheight = 0
     vim.keymap.set('n', ':', '<cmd>FineCmdline<CR>', {noremap=true})
   end
 }
