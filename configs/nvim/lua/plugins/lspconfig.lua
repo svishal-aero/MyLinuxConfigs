@@ -23,6 +23,7 @@ return {
         ensure_installed = {
           'lua_ls',
           'clangd',
+          'texlab',
         }
 
       })
@@ -41,6 +42,7 @@ return {
 
       lspconfig.lua_ls.setup({ capabilities = capabilities })
       lspconfig.clangd.setup({ capabilities = capabilities })
+      lspconfig.texlab.setup({ capabilities = capabilities })
 
       vim.api.nvim_create_autocmd('LspAttach', {
 
