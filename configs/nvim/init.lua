@@ -21,6 +21,8 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr   = "nvim_treesitter#foldexpr()"
 vim.opt.cursorline = true
 
+require('statusline')
+
 -- This block downloads the lazy package manager if not already installed and sets the path so that nvim knows where to find it
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

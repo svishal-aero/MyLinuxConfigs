@@ -11,10 +11,14 @@ return {
       local builtin = require('telescope.builtin')
 
       -- These are the mappings that fire up telescope
-      vim.keymap.set('n', '<Leader>ff', builtin.find_files,     {})
-      vim.keymap.set('n', '<Leader>fg', builtin.live_grep,      {})
-      vim.keymap.set('n', '<Leader>fd', builtin.diagnostics,    {})
-      vim.keymap.set('n', '<Leader>fr', builtin.lsp_references, {})
+      vim.keymap.set('n', '<Leader>fb', builtin.buffers,         {noremap = true})
+      vim.keymap.set('n', '<Leader>ff', builtin.find_files,      {noremap = true})
+      vim.keymap.set('n', '<Leader>fg', builtin.live_grep,       {noremap = true})
+      vim.keymap.set('n', '<Leader>fh', builtin.help_tags,       {noremap = true})
+      vim.keymap.set('n', '<Leader>fs', builtin.grep_string,     {noremap = true})
+      vim.keymap.set('n', '<Leader>fd', builtin.diagnostics,     {noremap = true})
+      vim.keymap.set('n', '<Leader>gr', builtin.lsp_references,  {noremap = true})
+      vim.keymap.set('n', '<Leader>gd', builtin.lsp_definitions, {noremap = true})
 
     end
   },
