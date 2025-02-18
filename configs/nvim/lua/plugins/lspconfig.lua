@@ -23,8 +23,8 @@ return {
         ensure_installed = {
           'lua_ls',
           'clangd',
-          'texlab',
           'pyright',
+          'texlab',
         }
 
       })
