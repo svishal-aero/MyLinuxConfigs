@@ -14,7 +14,7 @@ set vi-cmd-mode-string "\001\e[31;1m\002[:] \001\e[0m\002"
 # Reload command for this file
 "\C-x\C-r": re-read-init-file
 
-# vi settings
+# Generic vi keybindings
 $if mode=vi
 
     # normal mode
@@ -26,5 +26,19 @@ $if mode=vi
     # insert mode
     set keymap vi-insert
     "jk": vi-movement-mode # remap escape
+
+$endif
+
+# Environment-specific keybindings
+$if Bash
+
+  $if mode=vi
+
+    # normal mode
+    set keymap vi-command
+    " g" : "Igrep -s --color=always \"jkA\" ./*\n"
+    " rg": "Igrep -s -r --color=always \"jkA\" .\n"
+
+  $endif
 
 $endif
