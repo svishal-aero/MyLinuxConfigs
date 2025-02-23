@@ -6,4 +6,4 @@
 	name = svishal-aero
 	email = svishal.aero@gmail.com
 [core]
-  autocrlf = input
+	autocrlf = input
