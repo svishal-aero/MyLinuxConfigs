@@ -1,4 +1,8 @@
 vim.cmd([[
+  au InsertEnter * hi statusline guifg=black guibg=#d7afff ctermbg=black ctermfg=magenta
+  au InsertLeave * hi statusline guifg=black guibg=#8fbfdc ctermbg=black ctermfg=cyan
+  hi statusline                  guifg=black guibg=#8fbfdc ctermbg=black ctermfg=cyan
+
   " Use double quotes for keys in dictionary below to find ctrl key commands accurately
   let g:currentmode={
       \ "n"      : 'Normal'   , "no"     : 'Normal·Operator Pending',
@@ -12,46 +16,24 @@ vim.cmd([[
       \ "r?"     : 'Confirm'  , "!"      : 'Shell'                  ,
       \ "t"      : 'Terminal'
       \}
-  
-  function! StatusLineSetColor()
-    let s=""
-    if(mode()=="i")
-      let s.="%#hlInsert#"
-    elseif(mode()=="R" || mode()=="Rv")
-      let s.="%#hlReplace#"
-    elseif(mode()=="v" || mode()=="V" || mode()=="\<C-v>")
-      let s.="%#hlVisual#"
-    else
-      let s.="%#hlNormal#"
-    end
-    return s
-  endfunction
-  
-  function! StatusLineWrite()
-    let s=""
-    let s.=StatusLineSetColor()
-    "let s.=" %n "
-    let s.=" %<%F%m%r%h%w "
-    let s.="%#hlPadding# "
-    let s.="%#hlMiddle# %Y "
-    let s.="%#hlPadding# "
-    let s.=" (%{&ff})%="
-    let s.="%#hlMiddle# col: %02v "
-    let s.="%#hlPadding# "
-    let s.="%#hlRowInfo# ln: %02l/%L (%3p%%) "
-    let s.=StatusLineSetColor()
-    let s.=" %{toupper(g:currentmode[mode()])} "
-    return s
-  endfunction
-  
   set laststatus=2
-  set statusline=%!StatusLineWrite()
-  
-  hi hlRowInfo ctermfg=007 ctermbg=239 guifg=#c0c0c0 guibg=#4e4e4e
-  hi hlMiddle  ctermfg=007 ctermbg=236 guifg=#c0c0c0 guibg=#303030
-  hi hlPadding ctermfg=236 ctermbg=236 guifg=#303030 guibg=#303030
-  hi hlNormal  ctermfg=232 ctermbg=014 guifg=#080808 guibg=#00ffff
-  hi hlInsert  ctermfg=232 ctermbg=013 guifg=#080808 guibg=#ff00ff
-  hi hlVisual  ctermfg=232 ctermbg=012 guifg=#080808 guibg=#005fff
-  hi hlReplace ctermfg=232 ctermbg=011 guifg=#080808 guibg=#ffff00
+  set statusline=
+
+  "set statusline+=%0*\ %n\                                 " Buffer number
+  set statusline+=%0*\ %<%F%m%r%h%w\                       " File path, modified, readonly, helpfile, preview
+  set statusline+=%3*│                                     " Separator
+  set statusline+=%2*\ %Y\                                 " FileType
+  set statusline+=%3*│                                     " Separator
+
+  "set statusline+=%2*\ %{''.(&fenc!=''?&fenc:&enc).''}     " Encoding
+  set statusline+=\ (%{&ff})                               " FileFormat (dos/unix..)
+  set statusline+=%=                                       " Right Side
+  set statusline+=%2*\ col:\ %02v\                         " Colomn number
+  set statusline+=%3*│                                     " Separator
+  set statusline+=%1*\ ln:\ %02l/%L\ (%3p%%)\              " Line number / total lines, percentage of document
+  set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
+  hi User1 ctermfg=007 ctermbg=239 guibg=#4e4e4e guifg=#adadad
+  hi User2 ctermfg=007 ctermbg=236 guibg=#303030 guifg=#adadad
+  hi User3 ctermfg=236 ctermbg=236 guibg=#303030 guifg=#303030
+  hi User4 ctermfg=239 ctermbg=239 guibg=#4e4e4e guifg=#4e4e4e
 ]])
