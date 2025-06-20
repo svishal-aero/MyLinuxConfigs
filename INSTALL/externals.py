@@ -18,8 +18,7 @@ externals = {
     'nvim':
     {
         'install': True,
-        'x86_64': 'https://github.com/neovim/neovim/releases/'
-                  'download/stable/nvim-linux64.tar.gz',
+        'x86_64': 'https://github.com/neovim/neovim/releases/download/v0.11.2/nvim-linux-x86_64.tar.gz',
         'custom':
                   'mkdir -p ' + dirname + '/nvim;'
                   'git clone https://github.com/neovim/neovim;'
