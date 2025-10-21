@@ -1,0 +1,44 @@
+# No bell sounds
+set bell-style none
+
+# Want vi to be the default editor for readline
+set editing-mode vi
+
+# Show which mode the terminal is in (Normal or insert)
+set show-mode-in-prompt on
+set vi-ins-mode-string "\001\e[32;1m\002[+] \001\e[0m\002"
+set vi-cmd-mode-string "\001\e[31;1m\002[:] \001\e[0m\002"
+# set vi-ins-mode-string \1\e[6 q\2
+# set vi-cmd-mode-string \1\e[2 q\2
+
+# Reload command for this file
+"\C-x\C-r": re-read-init-file
+
+# Generic vi keybindings
+$if mode=vi
+
+    # normal mode
+    set keymap vi-command
+    "v": ""
+    "V": ""
+    "\C-v": ""
+
+    # insert mode
+    set keymap vi-insert
+    "jk": vi-movement-mode # remap escape
+
+$endif
+
+# Environment-specific keybindings
+$if Bash
+
+  $if mode=vi
+
+    # normal mode
+    set keymap vi-command
+    " g" : "Igrep -s --color=always \"jkA\" ./*\n"
+    " rg": "Igrep -s -r --color=always \"jkA\" .\n"
+
+  $endif
+
+$endif

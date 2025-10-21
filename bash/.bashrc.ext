@@ -1,0 +1,11 @@
+git_branch() {
+    __temp=`git rev-parse --abbrev-ref HEAD 2> /dev/null`
+    [ "$__temp" = "" ] && echo "" || echo "[${__temp}] "
+    unset __temp
+}
+
+PS1="\[\033[32m\][\[\$(date +%H:%M)\]]\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \[\033[01;33m\]\$(git_branch)\[\033[00m\]\\n\[\033[01;32m\]\343\200\213\[\033[00m\]"
+
+PROMPT_COMMAND="echo"
+
+stty -ixon
