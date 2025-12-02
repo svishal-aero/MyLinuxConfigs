@@ -47,6 +47,7 @@ return {
       vim.keymap.set('n', '<Leader>fh', builtin.help_tags,       {noremap = true})
       vim.keymap.set('n', '<Leader>fs', builtin.grep_string,     {noremap = true})
       vim.keymap.set('n', '<Leader>fd', builtin.diagnostics,     {noremap = true})
+      vim.keymap.set('n', '<Leader>fr', builtin.oldfiles,        {noremap = true})
       vim.keymap.set('n', 'gr',         custom_lsp_references,   {noremap = true})
       vim.keymap.set('n', 'gd',         builtin.lsp_definitions, {noremap = true})
 

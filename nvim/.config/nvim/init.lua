@@ -1,4 +1,6 @@
 vim.o.winborder      = "rounded"
+vim.o.expandtab      = true
+vim.o.softtabstop    = 2
 vim.o.tabstop        = 2
 vim.o.shiftwidth     = 2
 vim.o.number         = true
@@ -8,14 +10,6 @@ vim.g.mapleader      = ' '
 
 -- Alias for the Escape key
 vim.keymap.set('i', 'jk', '<Esc>',  {noremap=true})
-
--- Navigation between vim panes
-vim.keymap.set('n', '<C-h>'     , '<C-w>h'          , {noremap=true})
-vim.keymap.set('n', '<C-j>'     , '<C-w>j'          , {noremap=true})
-vim.keymap.set('n', '<C-k>'     , '<C-w>k'          , {noremap=true})
-vim.keymap.set('n', '<C-l>'     , '<C-w>l'          , {noremap=true})
-vim.keymap.set('n', '<leader>h' , '<cmd>noh<CR>'    , {noremap=true})
-vim.keymap.set('n', '<leader>bd', '<cmd>bdelete<CR>', {noremap=true})
 
 -- Code folding
 --vim.opt.foldmethod  = "expr"
@@ -55,3 +49,44 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- This completes the installation of any packages that are requested from the lazy package manager
 require('lazy').setup('plugins')
 require('oil').setup()
+
+local deleteBufAndGoToPrevBufIfExists = function()
+  local curr = vim.api.nvim_get_current_buf()
+  if vim.bo[curr].modified then
+    vim.api.nvim_echo({{'Buffer not deleted: unsaved changes!', 'WarningMsg'}}, false, {})
+    return
+  end
+  local unpack = table.unpack or unpack
+  local jumplist, jidx = unpack(vim.fn.getjumplist())
+  local log = ''
+  local target_buf = nil
+  for i=jidx, 1, -1 do
+    local jump = jumplist[i]
+    local condition = jump and jump.bufnr and jump.bufnr~=curr
+    condition = condition and vim.api.nvim_buf_is_valid(jump.bufnr)
+    condition = condition and vim.api.nvim_buf_is_loaded(jump.bufnr)
+    log = log .. '\nJumping to buffer ' .. vim.api.nvim_buf_get_name(jump.bufnr)
+    if condition then
+      target_buf = jump.bufnr
+      break
+    end
+  end
+  --vim.api.nvim_echo({{log, 'WarningMsg'}}, false, {})
+  if target_buf then
+    vim.api.nvim_set_current_buf(target_buf)
+  else
+    local scratch = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_set_current_buf(scratch)
+  end
+  if vim.api.nvim_buf_is_valid(curr) then
+    vim.api.nvim_buf_delete(curr, { force = false })
+  end
+end
+
+-- Navigation between vim panes
+vim.keymap.set('n', '<C-h>'     , '<C-w>h'                       , {noremap=true})
+vim.keymap.set('n', '<C-j>'     , '<C-w>j'                       , {noremap=true})
+vim.keymap.set('n', '<C-k>'     , '<C-w>k'                       , {noremap=true})
+vim.keymap.set('n', '<C-l>'     , '<C-w>l'                       , {noremap=true})
+vim.keymap.set('n', '<leader>h' , '<cmd>noh<CR>'                 , {noremap=true})
+vim.keymap.set('n', '<leader>bd', deleteBufAndGoToPrevBufIfExists, {noremap=true})

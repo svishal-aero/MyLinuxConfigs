@@ -1,4 +1,27 @@
 -- [[
+
+vim.filetype.add({extension={cl='opencl'}})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "opencl",
+  callback = function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    vim.lsp.start({
+      name = "clangd-opencl",
+      cmd = { "clangd" },
+      --root_dir = vim.fs.dirname(vim.fs.find({ ".git", ".clangd", "compile_commands.json" }, { upward = true })[1]),
+      init_options = {
+        fallbackFlags = { "-x", "cl", "-cl-std=CL2.0" },
+      },
+    })
+
+    local opts = { buffer = bufnr }
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
+  end,
+})
+
 return {
   {
     'williamboman/mason.nvim',
@@ -21,6 +44,7 @@ return {
       require('mason-lspconfig').setup({
 
         ensure_installed = {
+          'neocmake',
           'lua_ls',
           'clangd',
           'pyright',
@@ -55,7 +79,13 @@ return {
 				},
 				capabilities = capabilities,
 			})
-      vim.lsp.config('clangd', { capabilities = capabilities })
+      vim.lsp.config('clangd', {
+        settings = {
+          filetypes = {'c', 'cpp', 'cu', 'cl'},
+        },
+        capabilities = capabilities,
+      })
+      vim.lsp.config('neocmake', { capabilities = capabilities })
       vim.lsp.config('texlab', { capabilities = capabilities })
       vim.lsp.config('pyright', { capabilities = capabilities })
 
@@ -70,7 +100,7 @@ return {
           vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
           vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
           vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-          vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+          --vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
           vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
           vim.keymap.set('n', '<Leader>o', vim.diagnostic.open_float, opts)
           vim.keymap.set('n', '<Leader>;', vim.diagnostic.goto_next, opts)

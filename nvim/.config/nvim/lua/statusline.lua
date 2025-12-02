@@ -1,7 +1,7 @@
 vim.cmd([[
-  au InsertEnter * hi statusline guifg=black guibg=#d7afff ctermbg=black ctermfg=magenta
-  au InsertLeave * hi statusline guifg=black guibg=#8fbfdc ctermbg=black ctermfg=cyan
-  hi statusline                  guifg=black guibg=#8fbfdc ctermbg=black ctermfg=cyan
+  au InsertEnter * hi statusline guifg=#101010 guibg=#d7afff ctermbg=black ctermfg=magenta
+  au InsertLeave * hi statusline guifg=#101010 guibg=#8fbfdc ctermbg=black ctermfg=cyan
+  hi statusline                  guifg=#101010 guibg=#8fbfdc ctermbg=black ctermfg=cyan
 
   " Use double quotes for keys in dictionary below to find ctrl key commands accurately
   let g:currentmode={
@@ -32,8 +32,8 @@ vim.cmd([[
   set statusline+=%3*│                                     " Separator
   set statusline+=%1*\ ln:\ %02l/%L\ (%3p%%)\              " Line number / total lines, percentage of document
   set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
-  hi User1 ctermfg=007 ctermbg=239 guibg=#4e4e4e guifg=#adadad
-  hi User2 ctermfg=007 ctermbg=236 guibg=#303030 guifg=#adadad
-  hi User3 ctermfg=236 ctermbg=236 guibg=#303030 guifg=#303030
-  hi User4 ctermfg=239 ctermbg=239 guibg=#4e4e4e guifg=#4e4e4e
+  hi User1 guibg=#4e4e4e guifg=#adadad ctermfg=007 ctermbg=239
+  hi User2 guibg=#303030 guifg=#adadad ctermfg=007 ctermbg=236
+  hi User3 guibg=#303030 guifg=#303030 ctermfg=236 ctermbg=236
+  hi User4 guibg=#4e4e4e guifg=#4e4e4e ctermfg=239 ctermbg=239
 ]])
