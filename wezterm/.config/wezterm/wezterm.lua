@@ -4,9 +4,13 @@ local config  = wezterm.config_builder()
 config.initial_cols = 120
 config.initial_rows = 28
 
-config.font = wezterm.font('JetBrainsMonoNL Nerd Font')
+config.font = wezterm.font('JetBrainsMonoNL NFM')
+--config.font = wezterm.font('RobotoMono Nerd Font')
+--config.font = wezterm.font('IosevkaVS')
+--config.cell_width = 1.0
+--config.line_height = 1.0
 
-config.font_size    = 13
+config.font_size    = 15
 config.color_scheme = 'Catppuccin Mocha'
 
 config.window_decorations = 'NONE | RESIZE'

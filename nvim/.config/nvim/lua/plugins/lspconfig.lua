@@ -88,6 +88,7 @@ return {
       vim.lsp.config('neocmake', { capabilities = capabilities })
       vim.lsp.config('texlab', { capabilities = capabilities })
       vim.lsp.config('pyright', { capabilities = capabilities })
+      vim.lsp.config('mesonlsp', { capabilities = capabilities })
 
       vim.api.nvim_create_autocmd('LspAttach', {
 
